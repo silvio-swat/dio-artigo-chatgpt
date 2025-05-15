@@ -1,0 +1,40 @@
+# Checklist para gerar artigos de qualidade
+- [] Definir o assunto
+- [] Título chamativo: headline
+- [] Imagem de capa chamativa
+- [] Blocos de artigo
+- [] Postar o artigo com um call to Action
+
+Crie 10 títulos chamativos sobre as diretivas de Laravel
+
+
+Prompt para artigo sobre Laravel
+
+## Assunto
+
+Assunto: Laravel
+
+## Título
+
+Construindo APIs RESTful Seguras com Laravel Passport: Passo a Passo
+
+## Blocos
+- O que é o Laravel e o Laravel Passport
+- Qual a importância do Laravel Passport
+- Cite exemplos de implementação do Laravel Passport
+- Faça um call to action para as minhas redes sociais
+- Insira 3 hashtags que façam sentido
+
+Comporte-se como um escritor de artigos tech Back-end e escreva o Artigo atendendo as regras abaixo
+{Regras}
+> No máximo 5 linhas por bloco de explicação
+> Me explique de maneira informal, como se eu fosse uma criança de 10 anos
+> Os Blocos que serão criados estão abaixo
+- O que é o Laravel e o Laravel Passport
+- Qual a importância do Laravel Passport
+- Cite exemplos de implementação do Laravel Passport
+- Faça um call to action para as minhas redes sociais
+- Insira 3 hashtags que façam sentido
+
+Conteúdo gerado por: Chatgpt e revisões humanas
+Ilustrações de capa: Gerada pela lexica.art
