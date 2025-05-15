@@ -8,7 +8,7 @@
 Crie 10 títulos chamativos sobre as diretivas de Laravel
 
 
-Prompt para artigo sobre Laravel
+---------- Prompt para artigo sobre Laravel ------------------------------------
 
 ## Assunto
 
@@ -38,3 +38,121 @@ Comporte-se como um escritor de artigos tech Back-end e escreva o Artigo atenden
 
 Conteúdo gerado por: Chatgpt e revisões humanas
 Ilustrações de capa: Gerada pela lexica.art
+
+---------- Prompt para gerar códigos ------------------------------------
+Gere um exemplo de código de implementação do Laravel Passport em um controller
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+<?php
+class AuthController extends Controller
+{
+  // Método para registrar um novo usuário
+  public function register(Request $request)
+  {
+      // Criar o usuário
+      $user = User::create([
+          'name' => $request->name,
+          'email' => $request->email,
+          'password' => bcrypt($request->password),
+      ]);
+
+      // Retornar resposta de sucesso
+      return response()->json(['message' => 'Usuário registrado com sucesso!'], 201);
+  }
+
+  // Método para fazer login do usuário
+  public function login(Request $request)
+  {
+      // Validar os dados recebidos
+      $request->validate([
+          'email' => 'required|string|email',
+          'password' => 'required|string',
+      ]);
+
+      // Verificar as credenciais
+      if (!Auth::attempt($request->only('email', 'password'))) {
+          return response()->json(['message' => 'Credenciais inválidas'], 401);
+      }
+
+      // Gerar o token de acesso
+      $user = $request->user();
+      $token = $user->createToken('Token de Acesso')->accessToken;
+
+      // Retornar o token
+      return response()->json(['token' => $token], 200);
+  }
+}
+
+Exemplos de implementação do Laravel Passport
+Dê um exemplo de API RESTful controller com requisições laravel passport implementadas
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Task;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class TaskController extends Controller
+{
+  // Listar todas as tarefas do usuário autenticado
+  public function index()
+  {
+      return response()->json(Auth::user()->tasks);
+  }
+
+  // Criar uma nova tarefa
+  public function store(Request $request)
+  {
+      $request->validate([
+          'title' => 'required|string|max:255',
+          'description' => 'nullable|string',
+      ]);
+
+      $task = Auth::user()->tasks()->create($request->all());
+
+      return response()->json($task, 201);
+  }
+
+  // Exibir uma tarefa específica
+  public function show(Task $task)
+  {
+      $this->authorize('view', $task);
+
+      return response()->json($task);
+  }
+
+  // Atualizar uma tarefa
+  public function update(Request $request, Task $task)
+  {
+      $this->authorize('update', $task);
+
+      $request->validate([
+          'title' => 'sometimes|required|string|max:255',
+          'description' => 'nullable|string',
+      ]);
+
+      $task->update($request->all());
+
+      return response()->json($task);
+  }
+
+  // Deletar uma tarefa
+  public function destroy(Task $task)
+  {
+      $this->authorize('delete', $task);
+
+      $task->delete();
+
+      return response()->json(null, 204);
+  }
+}
+
